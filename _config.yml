@@ -104,6 +104,9 @@ theme: cactus
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: <repository url> # https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
-  branch: main
-  message: [message]
+  repo: https://github.com/fjulien/f1g
+  branch: gh-pages
+  message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
+  name: fjulien
+  email: fettingerjulien@yahoo.fr
+  token: $GITHUB_TOKEN
