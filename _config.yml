@@ -4,12 +4,20 @@
 
 # Site
 title: F1G
-subtitle: ""
+subtitle: Blog personnel et technique sur mon quotidien, mes passions et mon métier.
 description: ""
-keywords:
+keywords: 
+  - javascript
+  - typescript
+  - web
+  - frontend
+  - backend
+  - development
+  - france
+  - blog
 author: FETTINGER Julien
 language: fr
-timezone: ""
+timezone: "FR"
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
