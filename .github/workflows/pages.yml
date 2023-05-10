@@ -1,9 +1,9 @@
-name: Deploy gitgub pages
+name: Auto deploy github pages
 
 on:
   push:
     branches:
-      - develop  # default branch
+      - develop
 
 jobs:
   pages:
