@@ -12,6 +12,8 @@ on:
     - 'scaffolds/**'
     - 'workflows/**'
     - 'source/_drafts/**'
+    - 'scripts/**'
+
 
 jobs:
   pages:
