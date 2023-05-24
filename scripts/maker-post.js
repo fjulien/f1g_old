@@ -8,6 +8,7 @@ export default class MakerPost {
   #conclusion;
   #mainImage;
   #languageType = "javascript";
+  #tags = [];
 
   constructor(fileName, languageType) {
     this.#emptyChecking(fileName);
@@ -17,6 +18,11 @@ export default class MakerPost {
     this.#languageType = languageType;
   }
 
+  /**
+   * 
+   * @param {String} title 
+   * @returns this
+   */
   title(title) {
     const cleanTitle = this.#trimText(title);
     this.#emptyChecking(cleanTitle);
@@ -26,17 +32,38 @@ export default class MakerPost {
   }
 
   mainImage({ src, url }) {
-    this.#emptyChecking({ src, url });
+    this.#emptyChecking(src, url);
     this.#mainImage = this.#setImage({ src, url });
     return this;
   }
 
+
+  /**
+   * 
+   * @param {String} introduction 
+   * @returns this
+   */
   introduction(introduction) {
     this.#emptyChecking(introduction);
     this.#introduction = introduction;
     return this;
   } // who what when where why
 
+  /**
+   * 
+   * @param {String[]} tags 
+   * @returns this
+   */
+  tags(tags) {
+    this.#tags = tags;
+    return this;
+  }
+
+  /**
+   * 
+   * @param {{ title: String, content: String, image: {url:String, src: String}, code: String }} section 
+   * @returns this
+   */
   addSection({ title, content, image, code }) {
     this.#emptyChecking(title, content, image, code);
     const section = {
@@ -49,12 +76,20 @@ export default class MakerPost {
     return this;
   }
 
+  /**
+   * 
+   * @param {String} conclusion 
+   * @returns this
+   */
   conclusion(conclusion) {
     this.#emptyChecking(conclusion);
     this.#conclusion = conclusion;
     return this;
   }
 
+  /**
+   * 
+   */
   publish() {
     this.#checkingAllPostBeforPublish();
     this.#makePostHeader();
@@ -65,6 +100,10 @@ export default class MakerPost {
 
   #makePostHeader() {
     this.#newPost.write(this.#mainImage);
+    this.#write(`---`);
+    this.#write(`title: ${this.#title}`);
+    this.#write(`tags: ${this.#tags.join(' ')}`);
+    this.#write(`---`);
     this.#write(`# ${this.#title}`);
     this.#write(this.#introduction);
   }
@@ -90,10 +129,10 @@ export default class MakerPost {
   #checkingAllPostBeforPublish() {
     this.#mustHasInPost(this.#mainImage, "Main image");
     this.#mustHasInPost(this.#title, "Title");
+    this.#mustHasInPost(this.#tags, "Tags");
     this.#mustHasInPost(this.#introduction, "Introduction");
     this.#mustHasInPost(this.#sections.length, "Sections");
     this.#mustHasInPost(this.#conclusion, "Conclusion");
-
   }
 
   #setImage({ src, url }) {
@@ -111,7 +150,7 @@ export default class MakerPost {
 
   // Functional checking
   #emptyChecking(...contents) {
-    if (!contents.every(Boolean)) {
+    if (!contents.some(Boolean)) {
       throw new Error("Content is empty");
     }
   }
