@@ -99,11 +99,11 @@ export default class MakerPost {
   }
 
   #makePostHeader() {
-    this.#newPost.write(this.#mainImage);
-    this.#write(`---`);
-    this.#write(`title: ${this.#title}`);
-    this.#write(`tags: ${this.#tags.join(' ')}`);
-    this.#write(`---`);
+    this.#writeWithouLineBreaker(`---`);
+    this.#writeWithOneLineBreaker(`title: ${this.#title}`);
+    this.#writeWithOneLineBreaker(`tags: ${this.#tags.join(' ')}`);
+    this.#writeWithOneLineBreaker(`---`);
+    this.#write(this.#mainImage);
     this.#write(`# ${this.#title}`);
     this.#write(this.#introduction);
   }
@@ -146,6 +146,14 @@ export default class MakerPost {
 
   #write(line) {
     this.#newPost.write(`\n\n${line}`);
+  }
+
+  #writeWithouLineBreaker(line) {
+    this.#newPost.write(line);
+  }
+
+  #writeWithOneLineBreaker(line) {
+    this.#newPost.write(`\n${line}`);
   }
 
   // Functional checking

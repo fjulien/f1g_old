@@ -1,16 +1,13 @@
-![tedts](test)
-
 ---
-
 title: True false VS truthy et falsy
-
 tags: Javascript
-
 ---
+
+![tedts](test)
 
 # True false VS truthy et falsy
 
-Une belle intro
+C'est souvent avec les opérateurs que je me demande si ma variable est vrai ou pas en javascript. C'est vrai que que la notion de "valeur de type fausse" est assez
 
 ## New section
 
