@@ -18,11 +18,10 @@ export default class MakerPost {
   }
 
   title(title) {
-    title = this.#trimText(title);
-    this.#trimText(title);
-    this.#emptyChecking(title);
-    this.#sizeTitleChecking(title);
-    this.#title = title;
+    const cleanTitle = this.#trimText(title);
+    this.#emptyChecking(cleanTitle);
+    this.#sizeTitleChecking(cleanTitle);
+    this.#title = cleanTitle;
     return this;
   }
 
@@ -38,44 +37,68 @@ export default class MakerPost {
     return this;
   } // who what when where why
 
-  publish() {
-    this.#mustHasInPost(this.#mainImage, "Main image");
-    this.#mustHasInPost(this.#title, "Title");
-    this.#mustHasInPost(this.#introduction, "Introduction");
-    this.#mustHasInPost(this.#sections.length, "Sections");
-    this.#mustHasInPost(this.#conclusion, "Conclusion");
-
-    this.#newPost.write(this.#mainImage);
-    this.#write(`# ${this.#title}`);
-    this.#write(this.#introduction);
-    this.#sections.forEach(article => {
-      this.#write(`## ${article.title}`);
-      this.#write(article.image);
-      this.#write(article.content);
-      if (!!article.code) {
-        this.#write(`\`\`\`${this.#languageType}\n${article.code}\n\`\`\``);
-      }
-    });
-    this.#write(`## Conclusion`);
-    this.#write(this.#conclusion);
-    this.#newPost.end();
-  }
-
   addSection({ title, content, image, code }) {
     this.#emptyChecking(title, content, image, code);
-    this.#sections.push({ title, content, image: this.#setImage(image), code });
+    const section = {
+      title,
+      content,
+      code,
+      image: image && this.#setImage(image), // Set image if has it
+    }
+    this.#sections.push(section);
     return this;
-  }
-
-  #setImage({ src, url }) {
-    this.#emptyChecking(src, url);
-    return `![${src}](${url})`;
   }
 
   conclusion(conclusion) {
     this.#emptyChecking(conclusion);
     this.#conclusion = conclusion;
     return this;
+  }
+
+  publish() {
+    this.#checkingAllPostBeforPublish();
+    this.#makePostHeader();
+    this.#makePostBody();
+    this.#makePostFooter();
+    this.#newPost.end();
+  }
+
+  #makePostHeader() {
+    this.#newPost.write(this.#mainImage);
+    this.#write(`# ${this.#title}`);
+    this.#write(this.#introduction);
+  }
+
+  #makePostBody() {
+    this.#sections.forEach(article => {
+      this.#write(`## ${article.title}`);
+      if (!!article.image) {
+        this.#write(article.image);
+      }
+      this.#write(article.content);
+      if (!!article.code) {
+        this.#write(`\`\`\`${this.#languageType}\n${article.code}\n\`\`\``);
+      }
+    });
+  }
+
+  #makePostFooter() {
+    this.#write(`## Conclusion`);
+    this.#write(this.#conclusion);
+  }
+
+  #checkingAllPostBeforPublish() {
+    this.#mustHasInPost(this.#mainImage, "Main image");
+    this.#mustHasInPost(this.#title, "Title");
+    this.#mustHasInPost(this.#introduction, "Introduction");
+    this.#mustHasInPost(this.#sections.length, "Sections");
+    this.#mustHasInPost(this.#conclusion, "Conclusion");
+
+  }
+
+  #setImage({ src, url }) {
+    this.#emptyChecking(src, url);
+    return `![${src}](${url})`;
   }
 
   #trimText(text) {
@@ -86,7 +109,7 @@ export default class MakerPost {
     this.#newPost.write(`\n\n${line}`);
   }
 
-  // Functional errors
+  // Functional checking
   #emptyChecking(...contents) {
     if (!contents.every(Boolean)) {
       throw new Error("Content is empty");
@@ -99,19 +122,37 @@ export default class MakerPost {
     }
   }
 
-  // 6 à 12 mots &  max 90 char
+  /**
+   * 6 to 12 words and max 90 characters
+   *
+   */
   #sizeTitleChecking(title) {
-    if (title.split(" ").length < 6) {
-      throw new Error("Title has not less words");
+    const numberOfWords = title.split(" ").length;
+    if (numberOfWords < 6) {
+      throw new Error(`The title does not contain enough words : ${numberOfWords}`);
     }
-    if (title.split(" ").length > 12) {
-      throw new Error("Title has over words");
+    if (numberOfWords > 12) {
+      throw new Error(`Title contains too many words : ${numberOfWords}`);
     }
     if (title.length > 90) {
-      throw new Error("Title has many chars");
+      throw new Error(`Title contains too many characters : ${title.length}`);
     }
   }
-  #sizePhraseChecking(content) {} // 15 a 20 mots
-  #sizePostChecking(content) {} // 500 -1000 à 1000 à 2000
-  #firstPersonChecking(content) {} // utilisation de la première personnee
+  /**
+   * 15 to 20 words by phrase
+   *
+   */
+  #sizePhraseChecking(content) { }
+
+  /**
+   * 500 to 2000 words in post
+   *
+   */
+  #sizePostChecking(content) { }
+
+  /**
+   * Use first person in post
+   *
+   */
+  #firstPersonChecking(content) { }
 }

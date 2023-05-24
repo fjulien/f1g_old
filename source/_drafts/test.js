@@ -2,7 +2,7 @@ import MakerPost from "../../scripts/maker-post.js";
 
 new MakerPost("test")
   .mainImage({ url: "test", src: "tedts" })
-  .title("Hello world! as as as as")
+  .title("Hello world! as as as as as")
   .introduction("Une belle intro")
   .addSection({
     title: "New section",
