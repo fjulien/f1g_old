@@ -22,4 +22,4 @@ Fetch all the data from that project and check out the appropriate commit listed
 
 Create a new javascript file in source/_draft
 
-`node source/_drafts/[new post].js`
+`node _source/_drafts/[new post].js`

@@ -101,7 +101,10 @@ export default class MakerPost {
   #makePostHeader() {
     this.#writeWithouLineBreaker(`---`);
     this.#writeWithOneLineBreaker(`title: ${this.#title}`);
-    this.#writeWithOneLineBreaker(`tags: ${this.#tags.join(' ')}`);
+    this.#writeWithOneLineBreaker(`date: ${Date.now()}`);
+    this.#writeWithOneLineBreaker(`tags: [${this.#tags.join(', ')}]`);
+    this.#writeWithOneLineBreaker(`categories: `);
+    this.#writeWithOneLineBreaker(`- [Angular]`);
     this.#writeWithOneLineBreaker(`---`);
     this.#write(this.#mainImage);
     this.#write(`# ${this.#title}`);
