@@ -3,9 +3,9 @@ title: about
 date: 2023-05-09 12:16:22
 ---
 
-Je suis Développeur fullstack principalement sur les languages JavaScript et TypeScript. J'ai choisi ce métier par passion après avoir travaillé en tant qu'Électrotechnicien dans les cuisines professionnelles et industrielles (une dizaine d'années). Je mets l'accent sur la qualité, la performance, la facilité de maintenance et la simplicité dans mon travail. Je ne néglige jamais les besoins du client car le but est toujours la meilleur experience utilisateur. 
+Je suis Développeur fullstack principalement sur les languages JavaScript et TypeScript. J'ai choisi ce métier par passion après avoir travaillé en tant qu'Électrotechnicien dans les cuisines professionnelles et industrielles (une dizaine d'années). Je mets l'accent sur la qualité et la simplicité dans mon travail. Je ne néglige jamais l'experience utilisateur car ca il est toujours le client final. 
 
-J'ai pris ma reconversion très au sérieux. Il ne s'agissait pas juste de trouver un métier qui paye bien, car c'était le cas avant, mais d'apprendre un nouveau domaine technique car j'avais fait le tour de mon précédent métier.
+J'ai pris ma reconversion très au sérieux. Il ne s'agissait pas juste de trouver un métier qui paye bien, car c'était le cas dans mon ancien job, mais d'apprendre un nouveau domaine technique car j'en avais fait le tour.
 
 Je me suis rendu compte qu'il y a des compétences communes entre ces deux métiers :
 - Sur la recherche de bugs qui ressemble à de la recherche d'une panne dans l'isolement au plus près
